@@ -632,6 +632,28 @@
             color: #38bdf8;
             font-weight: 600;
             min-width: 50px;
+            cursor: text;
+            padding: 2px 4px;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .size-value:hover {
+            background: rgba(56, 189, 248, 0.1);
+        }
+
+        .size-value:focus {
+            outline: 2px solid #38bdf8;
+            outline-offset: 2px;
+            background: rgba(56, 189, 248, 0.15);
+        }
+
+        body.dark .size-value:hover {
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        body.dark .size-value:focus {
+            background: rgba(56, 189, 248, 0.25);
         }
 
         .reset-link {
@@ -650,7 +672,7 @@
 
         .icons-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
             gap: 16px;
             padding-right: 8px;
             scroll-margin-top: 20px;
@@ -692,7 +714,11 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
-            overflow: hidden;
+            overflow: visible;
+            width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            min-width: 0;
         }
 
         body.dark .icon-item {
@@ -1699,8 +1725,8 @@
             <div class="controls-row">
                 <div class="control-group">
                     <label>Size</label>
-                    <input type="range" id="iconSize" min="1" max="4" step="0.5" value="2.5">
-                    <span class="size-value" id="sizeValue">2.5rem</span>
+                    <input type="range" id="iconSize" min="0" max="100" step="1" value="25">
+                    <span class="size-value" id="sizeValue" contenteditable="true" style="cursor: text; min-width: 50px; display: inline-block; padding: 2px 4px; border-radius: 4px; transition: background 0.2s;" onblur="handleSizeValueEdit(this)">2.5rem</span>
                 </div>
                 
                 <div class="control-group">
@@ -2320,7 +2346,7 @@
 
         function normalizeSettings() {
             const parsedSize = parseFloat(currentSettings.size);
-            currentSettings.size = !Number.isNaN(parsedSize) ? Math.min(Math.max(parsedSize, 1), 4) : defaultSettings.size;
+            currentSettings.size = !Number.isNaN(parsedSize) ? Math.min(Math.max(parsedSize, 1), 50) : defaultSettings.size;
             currentSettings.color = typeof currentSettings.color === 'string' ? currentSettings.color : defaultSettings.color;
             currentSettings.backgroundColor = typeof currentSettings.backgroundColor === 'string'
                 ? currentSettings.backgroundColor
@@ -2409,8 +2435,12 @@
             const sizeSlider = document.getElementById('iconSize');
             const sizeValue = document.getElementById('sizeValue');
             if (sizeSlider && sizeValue) {
-                sizeSlider.value = currentSettings.size;
-                sizeValue.textContent = `${currentSettings.size}rem`;
+                // Convert rem to slider value (reverse formula)
+                // sliderValue = 100 * ((rem - 1) / 49)^(1/4)
+                const sliderValue = 100 * Math.pow((currentSettings.size - 1) / 49, 1/4);
+                sizeSlider.value = Math.round(sliderValue);
+                const displayRem = Math.round(currentSettings.size * 10) / 10; // Round to 1 decimal for display
+                sizeValue.textContent = `${displayRem}rem`;
             }
 
             const iconColorSelect = document.getElementById('iconColor');
@@ -2976,13 +3006,44 @@
             
             const sizeSlider = document.getElementById('iconSize');
             sizeSlider.addEventListener('input', (e) => {
-                currentSettings.size = parseFloat(e.target.value);
-                document.getElementById('sizeValue').textContent = `${currentSettings.size}rem`;
+                // Convert slider value (0-100) to exponential rem (1-50)
+                // Formula: rem = 1 + 49 * (sliderValue/100)^4
+                // This ensures middle (50) is below 5rem
+                const sliderValue = parseFloat(e.target.value);
+                const rem = 1 + 49 * Math.pow(sliderValue / 100, 4);
+                currentSettings.size = rem; // Keep full precision internally
+                const displayRem = Math.round(rem * 10) / 10; // Round to 1 decimal for display
+                document.getElementById('sizeValue').textContent = `${displayRem}rem`;
                 renderIcons();
                 updateCodePreview();
                 saveSettings();
                 updateURL();
             });
+            
+            // Handle manual size value editing
+            window.handleSizeValueEdit = function(element) {
+                const text = element.textContent.trim();
+                const remMatch = text.match(/^([\d.]+)\s*rem?$/i);
+                if (remMatch) {
+                    const remValue = parseFloat(remMatch[1]);
+                    if (!isNaN(remValue) && remValue >= 1 && remValue <= 50) {
+                        currentSettings.size = remValue;
+                        // Convert rem to slider value (reverse formula)
+                        // sliderValue = 100 * ((rem - 1) / 49)^(1/4)
+                        const sliderValue = 100 * Math.pow((remValue - 1) / 49, 1/4);
+                        sizeSlider.value = Math.round(sliderValue);
+                        element.textContent = `${currentSettings.size}rem`;
+                        renderIcons();
+                        updateCodePreview();
+                        saveSettings();
+                        updateURL();
+                    } else {
+                        element.textContent = `${currentSettings.size}rem`;
+                    }
+                } else {
+                    element.textContent = `${currentSettings.size}rem`;
+                }
+            };
             
             document.getElementById('iconColor').addEventListener('change', (e) => {
                 currentSettings.color = e.target.value;
@@ -3050,6 +3111,12 @@
 
         function renderIcons() {
             const iconsGrid = document.getElementById('iconsGrid');
+            
+            // Calculate minimum column width based on icon size
+            // Icon size in rem * 16 = pixels, plus padding (32px each side) + some margin
+            const iconSizePx = currentSettings.size * 16;
+            const minColumnWidth = Math.max(140, iconSizePx + 64); // 64px for padding (32px each side)
+            iconsGrid.style.gridTemplateColumns = `repeat(auto-fill, minmax(${minColumnWidth}px, 1fr))`;
             
             if (filteredIcons.length === 0) {
                 iconsGrid.innerHTML = `
@@ -3153,9 +3220,26 @@
         function copyEmbedCode(iconName, event) {
             if (event) event.stopPropagation();
             
+            // Build style string from current settings
+            const sizePx = currentSettings.size * 16;
+            const styles = [];
+            
+            styles.push(`font-size: ${sizePx}px`);
+            styles.push('vertical-align: middle');
+            
+            if (currentSettings.bold) {
+                styles.push('font-weight: bold');
+            }
+            
+            if (currentSettings.color && currentSettings.color !== '#000000' && currentSettings.color !== '#1a1a1a' && currentSettings.color !== '#e4e4e7') {
+                styles.push(`color: ${currentSettings.color}`);
+            }
+            
+            const styleString = styles.join('; ');
+            
             const embedCode = `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<a href="https://fluttericons.com/?icon=${iconName}" style="text-decoration: none; color: #333;">
-  <span class="material-icons" style="font-size: 48px; vertical-align: middle;">${iconName}</span>
+<a href="https://fluttericons.com/?icon=${iconName}" style="text-decoration: none; color: ${currentSettings.color || '#333'};">
+  <span class="material-icons" style="${styleString}">${iconName}</span>
 </a>`;
             
             navigator.clipboard.writeText(embedCode).then(() => {
