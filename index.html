@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Primary Meta Tags -->
-    <title>Flutter Icons List - 1000+ Material Icons | flutterIcons.com</title>
-    <meta name="title" content="Flutter Icons List - 1000+ Material Icons | flutterIcons.com">
-    <meta name="description" content="Browse 1000+ Flutter Material icons. Search, preview, and copy Flutter icon code instantly. Free Flutter icons picker tool for developers.">
-    <meta name="abstract" content="Free Flutter Icons Picker: Browse 1000+ Material Design icons, search by name, customize size/color/style, and instantly copy Flutter code. Perfect for Flutter developers building mobile apps.">
+    <title>Flutter Icons Picker - 1000+ Material Icons with Copy Code | flutterIcons.com</title>
+    <meta name="title" content="Flutter Icons Picker - 1000+ Material Icons with Copy Code | flutterIcons.com">
+    <meta name="description" content="Browse 1000+ Flutter Material Icons with live preview, customization options, and one-click copy code. Perfect for Flutter developers. Free tool with search, size, color, and style controls.">
+    <meta name="keywords" content="flutter icons, material icons, flutter development, dart icons, flutter ui, material design icons, flutter picker, icon browser, flutter tools, mobile development">
     <meta name="author" content="Flutter Icons Picker">
     <meta name="robots" content="index, follow">
     <meta name="language" content="en-US">
@@ -39,7 +39,7 @@
     <!-- Additional SEO Meta Tags -->
     <meta name="theme-color" content="#0a0a0f">
     <meta name="msapplication-TileColor" content="#0a0a0f">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Flutter Icons">
     
@@ -640,8 +640,17 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
             gap: 16px;
-            min-height: 200vh;
             padding-right: 8px;
+            scroll-margin-top: 20px;
+            align-items: start;
+        }
+
+        #icons {
+            scroll-margin-top: 20px;
+            position: relative;
+            top: -20px;
+            visibility: hidden;
+            height: 0;
         }
 
         .icons-grid::-webkit-scrollbar {
@@ -800,7 +809,7 @@
         .toast {
             position: fixed;
             bottom: 24px;
-            right: 24px;
+            left: 24px;
             background: rgba(24, 24, 27, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -811,7 +820,7 @@
             transform: translateY(100px);
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1000;
+            z-index: 1001;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -947,6 +956,543 @@
             font-size: 1.1rem;
         }
 
+        .category-filter {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .category-filter {
+            background: rgba(24, 24, 27, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .collection-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark .collection-buttons {
+            background: rgba(24, 24, 27, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .category-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        body.dark .category-btn {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .category-btn:hover:not(.active) {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        body.dark .category-btn:hover:not(.active) {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .category-btn.active {
+            background: #38bdf8 !important;
+            color: white !important;
+            border-color: #38bdf8 !important;
+        }
+
+        body.dark .category-btn.active {
+            background: #38bdf8 !important;
+            color: white !important;
+            border-color: #38bdf8 !important;
+        }
+
+        .collection-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        body.dark .collection-btn {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .collection-btn:hover:not(.active):not(:disabled) {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        body.dark .collection-btn:hover:not(.active):not(:disabled) {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.4);
+        }
+
+        .collection-btn.active {
+            background: #38bdf8 !important;
+            color: white !important;
+            border-color: #38bdf8 !important;
+        }
+
+        .collection-btn.selected {
+            border: 2px solid #38bdf8;
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+        }
+
+        body.dark .collection-btn.selected {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        .collection-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .collection-action-btn {
+            padding: 6px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.8);
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+            min-width: 32px;
+        }
+
+        body.dark .collection-action-btn {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .collection-action-btn:hover:not(:disabled) {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .collection-action-btn.delete-btn:hover:not(:disabled) {
+            background: rgba(244, 63, 94, 0.1);
+            border-color: rgba(244, 63, 94, 0.3);
+        }
+
+        .collection-action-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Custom tooltips that appear instantly */
+        .collection-btn,
+        .collection-action-btn {
+            position: relative;
+        }
+
+        .collection-btn:hover::after,
+        .collection-action-btn:hover::after {
+            content: attr(data-title);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 6px 10px;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            font-size: 0.75rem;
+            white-space: nowrap;
+            border-radius: 6px;
+            pointer-events: none;
+            z-index: 1000;
+            margin-bottom: 6px;
+            opacity: 0;
+            animation: tooltipFadeIn 0.05s ease-out forwards;
+        }
+
+        body.dark .collection-btn:hover::after,
+        body.dark .collection-action-btn:hover::after {
+            background: rgba(255, 255, 255, 0.95);
+            color: #1a1a1a;
+        }
+
+        @keyframes tooltipFadeIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50%) translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+        }
+
+        /* Remove default browser tooltip delay by removing title on hover */
+        .collection-btn:hover,
+        .collection-action-btn:hover {
+            text-decoration: none;
+        }
+
+        .favorites-panel, .recent-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        body.dark .favorites-panel, body.dark .recent-panel {
+            background: rgba(24, 24, 27, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .favorites-panel.show, .recent-panel.show {
+            display: block;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .panel-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        body.dark .panel-title {
+            color: #e4e4e7;
+        }
+
+        .panel-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .panel-icon-item {
+            padding: 8px;
+            border-radius: 8px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            min-width: 60px;
+        }
+
+        body.dark .panel-icon-item {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .panel-icon-item:hover {
+            background: rgba(56, 189, 248, 0.1);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .panel-icon-item .material-icons {
+            font-size: 1.5rem;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .panel-icon-name {
+            font-size: 0.7rem;
+            color: #6b7280;
+            word-break: break-word;
+        }
+
+        body.dark .panel-icon-name {
+            color: #a1a1aa;
+        }
+
+        .icon-item .favorite-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            z-index: 2;
+        }
+
+        .icon-item:hover .favorite-btn {
+            opacity: 1;
+        }
+
+        .icon-item .favorite-btn.favorited {
+            opacity: 1;
+            color: #fbbf24;
+        }
+
+        .icon-item .favorite-btn .material-icons {
+            font-size: 18px;
+        }
+
+        .icon-item .select-checkbox {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            width: 20px;
+            height: 20px;
+            border: 2px solid rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            cursor: pointer;
+            opacity: 0;
+            transition: all 0.2s;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        body.dark .icon-item .select-checkbox {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(39, 39, 42, 0.9);
+        }
+
+        .icon-item.select-mode .select-checkbox {
+            opacity: 1;
+        }
+
+        .icon-item .select-checkbox.checked {
+            background: #38bdf8;
+            border-color: #38bdf8;
+            opacity: 1;
+        }
+
+        .icon-item .select-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .icon-item.select-mode:hover .select-checkbox {
+            opacity: 1;
+        }
+
+        .collection-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            display: none;
+        }
+
+        body.dark .collection-panel {
+            background: rgba(24, 24, 27, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .collection-panel.show {
+            display: block;
+        }
+
+        .collection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .collection-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .collection-btn {
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            background: rgba(56, 189, 248, 0.1);
+            color: #38bdf8;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .collection-btn:hover {
+            background: rgba(56, 189, 248, 0.2);
+            border-color: rgba(56, 189, 248, 0.5);
+        }
+
+        .collection-btn.primary {
+            background: #38bdf8;
+            color: white;
+            border-color: #38bdf8;
+        }
+
+        .collection-btn.primary:hover {
+            background: #0ea5e9;
+            border-color: #0ea5e9;
+        }
+
+        .collection-icons-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .collection-icon-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 6px;
+            font-size: 0.8rem;
+        }
+
+        .collection-icon-badge .material-icons {
+            font-size: 16px;
+            color: #38bdf8;
+        }
+
+        .collection-icon-badge .icon-name {
+            color: #1a1a1a;
+        }
+
+        body.dark .collection-icon-badge {
+            background: rgba(56, 189, 248, 0.15);
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        body.dark .collection-icon-badge .icon-name {
+            color: #e4e4e7;
+        }
+
+        .collection-icon-badge .remove-btn {
+            background: none;
+            border: none;
+            color: #6b7280;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 4px;
+            font-size: 16px;
+            line-height: 1;
+        }
+
+        body.dark .collection-icon-badge .remove-btn {
+            color: #a1a1aa;
+        }
+
+        .collection-icon-badge .remove-btn:hover {
+            color: #f43f5e;
+        }
+
+        .share-link-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #1a1a1a;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+            margin-top: 8px;
+        }
+
+        body.dark .share-link-input {
+            background: rgba(39, 39, 42, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .collection-selector {
+            background: rgba(249, 250, 251, 0.8);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            padding: 6px 12px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #1a1a1a;
+            font-family: inherit;
+            min-width: 120px;
+        }
+
+        body.dark .collection-selector {
+            background: rgba(39, 39, 42, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #e4e4e7;
+        }
+
+        .collection-btn-small {
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            color: #38bdf8;
+            transition: all 0.2s;
+            font-family: inherit;
+        }
+
+        .collection-btn-small:hover {
+            background: rgba(56, 189, 248, 0.2);
+        }
+
+        .share-btn {
+            background: #38bdf8;
+            color: white;
+            border-color: #38bdf8;
+        }
+
+        .share-btn:hover {
+            background: #0ea5e9;
+        }
+
         @media (max-width: 768px) {
             .container {
                 padding: 20px 16px;
@@ -1018,6 +1564,7 @@
                 left: 16px;
                 right: 16px;
                 bottom: 16px;
+                z-index: 1001;
             }
         }
     </style>
@@ -1046,12 +1593,17 @@
                 <input type="text" class="search-input" id="searchInput" placeholder="Search 1000+ material icons...">
                 <span class="material-icons search-icon">search</span>
             </div>
+            <div class="category-filter" id="categoryFilter"></div>
+            <div class="collection-buttons" id="collectionButtons">
+                <!-- Collections will be added here -->
+            </div>
             <div class="stats">
                 <span>Showing</span>
                 <span class="stats-count"><span id="visibleCount">0</span> / <span id="totalCount">0</span></span>
                 <span>icons</span>
             </div>
         </div>
+
 
         <div class="controls-panel">
             <div class="controls-row">
@@ -1115,12 +1667,18 @@
                         <input type="checkbox" id="outlinedToggle">
                         <label>Outlined</label>
                     </div>
+                    
+                    <div class="control-group">
+                        <input type="checkbox" id="darkPreviewToggle">
+                        <label>Dark Preview</label>
+                    </div>
                 </div>
                 
                 <span class="reset-link" onclick="resetSettings()">Reset</span>
             </div>
         </div>
 
+        <div id="icons"></div>
         <div class="icons-grid" id="iconsGrid"></div>
         
         <div style="position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden;">
@@ -1538,7 +2096,35 @@
         let currentSearchTerm = '';
         let selectedIcon = 'home';
         let isDrawerExpanded = false;
+        let currentCategory = 'all';
+        let recentIcons = [];
+        let collections = {};
+        let currentCollectionName = null; // For selection (adding icons)
+        let filteringCollectionName = null; // For filtering (showing only those icons)
         const STORAGE_KEY = 'flutter_icon_settings_v1';
+        const COLLECTIONS_KEY = 'flutter_icon_collections_v1';
+        const RECENT_KEY = 'flutter_icon_recent_v1';
+
+        // Icon categories
+        const iconCategories = {
+            'all': { name: 'All Icons', icons: [] },
+            'navigation': { name: 'Navigation', icons: ['home', 'menu', 'arrow_back', 'arrow_forward', 'arrow_upward', 'arrow_downward', 'navigation', 'explore', 'place', 'map', 'directions', 'location_on', 'my_location', 'near_me'] },
+            'actions': { name: 'Actions', icons: ['add', 'remove', 'delete', 'edit', 'save', 'cancel', 'check', 'close', 'done', 'clear', 'refresh', 'sync', 'download', 'upload', 'share', 'copy', 'cut', 'paste'] },
+            'communication': { name: 'Communication', icons: ['email', 'mail', 'phone', 'call', 'message', 'chat', 'chat_bubble', 'sms', 'notifications', 'notifications_active', 'forum', 'comment', 'reply', 'send'] },
+            'social': { name: 'Social', icons: ['person', 'people', 'group', 'account_circle', 'face', 'favorite', 'star', 'thumb_up', 'thumb_down', 'share', 'facebook', 'twitter'] },
+            'media': { name: 'Media', icons: ['play_arrow', 'pause', 'stop', 'skip_next', 'skip_previous', 'volume_up', 'volume_down', 'image', 'photo', 'video_library', 'camera', 'mic', 'headset'] },
+            'settings': { name: 'Settings', icons: ['settings', 'tune', 'build', 'admin_panel_settings', 'security', 'lock', 'lock_open', 'vpn_key', 'privacy_tip'] },
+            'files': { name: 'Files', icons: ['folder', 'folder_open', 'insert_drive_file', 'description', 'file_copy', 'attach_file', 'cloud_upload', 'cloud_download', 'archive'] },
+            'shopping': { name: 'Shopping', icons: ['shopping_cart', 'shopping_bag', 'store', 'payment', 'credit_card', 'local_offer', 'redeem', 'card_giftcard'] },
+            'time': { name: 'Time & Date', icons: ['schedule', 'calendar_today', 'access_time', 'alarm', 'timer', 'watch_later', 'event', 'date_range'] },
+            'weather': { name: 'Weather', icons: ['wb_sunny', 'cloud', 'rain', 'snow', 'thunderstorm', 'ac_unit', 'beach_access'] },
+            'ai': { name: 'AI', icons: ['psychology', 'psychology_alt', 'memory', 'auto_awesome', 'auto_awesome_motion', 'auto_fix_high', 'smart_toy', 'model_training', 'analytics', 'insights', 'trending_up', 'scatter_plot', 'dataset', 'data_object', 'auto_awesome_mosaic', 'speed', 'bolt', 'lightbulb', 'school', 'menu_book', 'tune', 'settings_automation', 'smart_button', 'visibility', 'remove_red_eye', 'lens', 'record_voice_over', 'translate', 'chat', 'cloud', 'computer'] },
+            'emoji': { name: 'Emoji', icons: ['emoji_emotions', 'emoji_events', 'emoji_flags', 'emoji_food_beverage', 'emoji_nature', 'emoji_objects', 'emoji_people', 'emoji_symbols', 'emoji_transportation', 'sentiment_satisfied', 'sentiment_satisfied_alt', 'sentiment_very_satisfied', 'sentiment_dissatisfied', 'sentiment_very_dissatisfied', 'sentiment_neutral', 'mood', 'mood_bad', 'tag_faces', 'insert_emoticon', 'face', 'face_2', 'face_3', 'face_4', 'face_5', 'face_6', 'face_retouching_natural', 'face_retouching_off', 'female', 'male', 'toys', 'local_fire_department', 'thumb_down', 'thumb_down_alt', 'thumb_down_off_alt', 'thumb_up', 'thumb_up_alt', 'thumb_up_off_alt', 'thumbs_up_down'] },
+            'chat': { name: 'Chat', icons: ['chat', 'chat_bubble', 'chat_bubble_outline', 'message', 'sms', 'send', 'reply', 'reply_all', 'forward', 'mark_chat_read', 'mark_chat_unread', 'mark_email_read', 'mark_email_unread', 'drafts', 'inbox', 'outbox', 'archive', 'delete', 'block', 'report', 'flag', 'star', 'star_border', 'favorite', 'favorite_border', 'bookmark', 'bookmark_border', 'attach_file', 'attach_email', 'insert_photo', 'insert_emoticon', 'mic', 'videocam', 'phone', 'call', 'call_end', 'call_made', 'call_received', 'call_missed', 'notifications', 'notifications_active', 'notifications_none', 'notifications_off', 'person', 'person_add', 'group', 'people', 'more_vert', 'more_horiz', 'settings', 'tune'] },
+            'crypto': { name: 'Crypto', icons: ['currency_bitcoin', 'currency_exchange', 'account_balance_wallet', 'account_balance', 'trending_up', 'trending_down', 'trending_flat', 'bar_chart', 'show_chart', 'candlestick_chart', 'analytics', 'insights', 'security', 'lock', 'vpn_key', 'shield', 'verified', 'check_circle', 'payments', 'payment', 'attach_money', 'monetization_on', 'savings', 'link', 'sync', 'refresh', 'network_check', 'wifi', 'qr_code', 'qr_code_scanner', 'history', 'receipt', 'description', 'notifications', 'notifications_active', 'warning', 'smartphone', 'computer', 'tablet'] },
+            'fun': { name: 'Fun', icons: ['celebration', 'party_mode', 'cake', 'local_fire_department', 'toys', 'sports_esports', 'videogame_asset', 'games', 'casino', 'theater_comedy', 'theaters', 'music_note', 'music_video', 'library_music', 'play_circle', 'play_arrow', 'pause', 'skip_next', 'skip_previous', 'volume_up', 'headset', 'mic', 'karaoke', 'sports', 'sports_soccer', 'sports_basketball', 'sports_baseball', 'sports_football', 'sports_tennis', 'sports_volleyball', 'sports_golf', 'pool', 'beach_access', 'local_activity', 'attractions', 'park', 'roller_skating', 'skateboarding', 'snowboarding', 'kayaking', 'sailing', 'surfing', 'paragliding', 'emoji_emotions', 'mood', 'sentiment_very_satisfied', 'tag_faces', 'face', 'face_2', 'face_3', 'face_4', 'face_5', 'face_6', 'thumb_up', 'favorite', 'star', 'local_fire_department', 'whatshot', 'auto_awesome', 'auto_awesome_motion'] },
+            'travel': { name: 'Travel', icons: ['flight', 'flight_takeoff', 'flight_land', 'airplanemode_active', 'airplane_ticket', 'train', 'directions_railway', 'directions_railway_filled', 'directions_bus', 'directions_bus_filled', 'directions_car', 'directions_car_filled', 'directions_bike', 'directions_boat', 'directions_boat_filled', 'directions_subway', 'directions_subway_filled', 'directions_walk', 'directions_transit', 'directions_transit_filled', 'directions', 'navigation', 'explore', 'place', 'location_on', 'location_pin', 'my_location', 'near_me', 'map', 'map', 'streetview', 'hotel', 'hotel_class', 'room', 'room_service', 'luggage', 'beach_access', 'local_activity', 'attractions', 'local_dining', 'restaurant', 'restaurant_menu', 'local_bar', 'local_cafe', 'local_gas_station', 'local_parking', 'local_pharmacy', 'local_hospital', 'local_mall', 'local_movies', 'local_see', 'local_shipping', 'local_taxi', 'schedule', 'calendar_today', 'access_time', 'event', 'date_range', 'wb_sunny', 'cloud', 'wb_cloudy', 'wb_incandescent', 'wb_twilight', 'wb_auto', 'wb_shade', 'wb_iridescent', 'wb_sunny', 'phone', 'wifi', 'camera', 'photo', 'image', 'description', 'receipt', 'confirmation_number', 'credit_card', 'payment', 'wallet'] }
+        };
 
         function hexToRgb(hex) {
             const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
@@ -1548,6 +2134,67 @@
                 b: parseInt(result[3], 16)
             } : {r: 0, g: 0, b: 0};
         }
+
+        // Base62 encoding (0-9, a-z, A-Z)
+        const BASE62 = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        function encodeNumberToBase62(num) {
+            if (num === 0) return '00';
+            let result = '';
+            while (num > 0) {
+                result = BASE62[num % 62] + result;
+                num = Math.floor(num / 62);
+            }
+            // Pad to 2 characters
+            return result.padStart(2, '0');
+        }
+
+        function decodeBase62ToNumber(str) {
+            let num = 0;
+            for (let i = 0; i < str.length; i++) {
+                num = num * 62 + BASE62.indexOf(str[i]);
+            }
+            return num;
+        }
+
+        // Encode icon name to number (index in flutterIcons array)
+        function encode(iconName) {
+            const index = flutterIcons.indexOf(iconName);
+            return index >= 0 ? index : -1;
+        }
+
+        // Decode number to icon name
+        function decode(number) {
+            if (number >= 0 && number < flutterIcons.length) {
+                return flutterIcons[number];
+            }
+            return null;
+        }
+
+        // Encode list of names into string of 2-char blocks
+        function encodeList(names) {
+            return names.map(name => {
+                const num = encode(name);
+                return num >= 0 ? encodeNumberToBase62(num) : '';
+            }).filter(block => block).join('');
+        }
+
+        // Decode string of 2-char blocks into list of names
+        function decodeList(encodedString) {
+            const names = [];
+            // Read 2 characters at a time
+            for (let i = 0; i < encodedString.length; i += 2) {
+                const block = encodedString.substr(i, 2);
+                if (block.length === 2) {
+                    const num = decodeBase62ToNumber(block);
+                    const name = decode(num);
+                    if (name) {
+                        names.push(name);
+                    }
+                }
+            }
+            return names;
+        }
         const defaultSettings = {
             size: 2.5,
             color: '#1a1a1a',
@@ -1556,6 +2203,7 @@
             invert: false,
             rounded: false,
             outlined: false,
+            darkPreview: false,
             theme: 'light'
         };
         let currentSettings = { ...defaultSettings };
@@ -1591,6 +2239,7 @@
             currentSettings.invert = Boolean(currentSettings.invert);
             currentSettings.rounded = Boolean(currentSettings.rounded);
             currentSettings.outlined = Boolean(currentSettings.outlined);
+            currentSettings.darkPreview = Boolean(currentSettings.darkPreview);
             currentSettings.theme = currentSettings.theme === 'dark' ? 'dark' : 'light';
         }
 
@@ -1688,11 +2337,13 @@
             const invertToggle = document.getElementById('invertToggle');
             const roundedToggle = document.getElementById('roundedToggle');
             const outlinedToggle = document.getElementById('outlinedToggle');
+            const darkPreviewToggle = document.getElementById('darkPreviewToggle');
 
             if (boldToggle) boldToggle.checked = currentSettings.bold;
             if (invertToggle) invertToggle.checked = currentSettings.invert;
             if (roundedToggle) roundedToggle.checked = currentSettings.rounded;
             if (outlinedToggle) outlinedToggle.checked = currentSettings.outlined;
+            if (darkPreviewToggle) darkPreviewToggle.checked = currentSettings.darkPreview;
         }
 
         function toggleTheme() {
@@ -1703,10 +2354,343 @@
             saveSettings();
         }
 
+        function loadCollections() {
+            try {
+                const stored = localStorage.getItem(COLLECTIONS_KEY);
+                collections = stored ? JSON.parse(stored) : {};
+                if (!collections['Favorites']) {
+                    collections['Favorites'] = [];
+                }
+            } catch (error) {
+                console.warn('Unable to load collections', error);
+                collections = { 'Favorites': [] };
+            }
+        }
+
+        function saveCollections() {
+            try {
+                localStorage.setItem(COLLECTIONS_KEY, JSON.stringify(collections));
+            } catch (error) {
+                console.warn('Unable to save collections', error);
+            }
+        }
+
+        function getCurrentCollection() {
+            if (!currentCollectionName) {
+                return [];
+            }
+            if (!collections[currentCollectionName]) {
+                collections[currentCollectionName] = [];
+            }
+            return collections[currentCollectionName];
+        }
+
+        function loadRecentIcons() {
+            try {
+                const stored = localStorage.getItem(RECENT_KEY);
+                recentIcons = stored ? JSON.parse(stored) : [];
+                if (recentIcons.length > 20) recentIcons = recentIcons.slice(0, 20);
+            } catch (error) {
+                console.warn('Unable to load recent icons', error);
+                recentIcons = [];
+            }
+        }
+
+        function saveRecentIcons() {
+            try {
+                localStorage.setItem(RECENT_KEY, JSON.stringify(recentIcons));
+            } catch (error) {
+                console.warn('Unable to save recent icons', error);
+            }
+        }
+
+        function addToRecent(iconName) {
+            recentIcons = recentIcons.filter(i => i !== iconName);
+            recentIcons.unshift(iconName);
+            if (recentIcons.length > 20) recentIcons = recentIcons.slice(0, 20);
+            saveRecentIcons();
+        }
+
+        function toggleIconInCollection(iconName, event) {
+            if (event) event.stopPropagation();
+            // If no collection selected, default to Favorites
+            if (!currentCollectionName) {
+                currentCollectionName = 'Favorites';
+                if (!collections['Favorites']) {
+                    collections['Favorites'] = [];
+                }
+            }
+            const collection = getCurrentCollection();
+            const index = collection.indexOf(iconName);
+            let message;
+            if (index > -1) {
+                collection.splice(index, 1);
+                message = `Icon removed from ${currentCollectionName}`;
+            } else {
+                collection.push(iconName);
+                message = `Icon added to ${currentCollectionName}`;
+            }
+            saveCollections();
+            renderCollectionButtons();
+            renderIcons();
+            showToast(message);
+        }
+
+        function isInCurrentCollection(iconName) {
+            if (!currentCollectionName) {
+                return false;
+            }
+            return getCurrentCollection().includes(iconName);
+        }
+
+        function renderCollectionButtons() {
+            const container = document.getElementById('collectionButtons');
+            if (!container) return;
+            
+            const collectionNames = Object.keys(collections).sort();
+            const hasActiveCollection = currentCollectionName && collections[currentCollectionName];
+            const canDelete = currentCollectionName && currentCollectionName !== 'Favorites';
+            const collection = hasActiveCollection ? getCurrentCollection() : [];
+            
+            let html = '';
+            
+            // Collection buttons with 3 states
+            collectionNames.forEach(name => {
+                let stateClass = '';
+                let tooltip = '';
+                
+                if (filteringCollectionName === name && currentCollectionName === name) {
+                    // State 2: Full (active for selection AND filtering)
+                    stateClass = 'active';
+                    tooltip = 'Click to unfilter';
+                } else if (currentCollectionName === name && filteringCollectionName !== name) {
+                    // State 1: Selected (border highlight, active for selection but not filtering)
+                    stateClass = 'selected';
+                    tooltip = 'Click to filter';
+                } else {
+                    // State 3: Inactive (no class)
+                    tooltip = 'Select list';
+                }
+                
+                html += `<button class="collection-btn ${stateClass}" onclick="selectCollection('${name}')" title="${tooltip}">${name}</button>`;
+            });
+            
+            // Action buttons (apply to collection in state 1 or 2)
+            html += `<button class="collection-action-btn" onclick="createNewCollection()" title="Create new list">+</button>`;
+            html += `<button class="collection-action-btn delete-btn" onclick="deleteCollection()" ${!canDelete ? 'disabled' : ''} title="${canDelete ? 'Remove list' : 'Cannot delete Favorites'}">-</button>`;
+            const shareTitle = hasActiveCollection && currentCollectionName ? `Copy ${currentCollectionName} shareable URL` : 'Sharable link';
+            html += `<button class="collection-action-btn" onclick="shareCurrentCollection()" ${!hasActiveCollection || collection.length === 0 ? 'disabled' : ''} title="${shareTitle}"><span class="material-icons">ios_share</span></button>`;
+            
+            container.innerHTML = html;
+        }
+
+        function selectCollection(name) {
+            // State 1: selected (border highlight) - currentCollectionName set, filteringCollectionName null
+            // State 2: active/full (full highlight) - both currentCollectionName and filteringCollectionName set to same
+            // State 3: inactive - both null or different
+            
+            if (currentCollectionName === name && filteringCollectionName === name) {
+                // Currently in state 2 (full), switch to state 1 (selected only)
+                filteringCollectionName = null;
+            } else if (currentCollectionName === name && filteringCollectionName === null) {
+                // Currently in state 1 (selected), switch to state 2 (full)
+                filteringCollectionName = name;
+            } else {
+                // Clicking different button - new one goes to state 1, old one goes to state 3
+                currentCollectionName = name;
+                filteringCollectionName = null;
+            }
+            
+            renderCollectionButtons();
+            filterIcons();
+        }
+
+        function createNewCollection() {
+            const name = prompt('Collection name:');
+            if (name && name.trim()) {
+                const trimmedName = name.trim();
+                if (!collections[trimmedName]) {
+                    collections[trimmedName] = [];
+                    currentCollectionName = trimmedName;
+                    filteringCollectionName = null; // State 1: selected but not filtering
+                    saveCollections();
+                    renderCollectionButtons();
+                    filterIcons();
+                } else {
+                    alert('Collection already exists!');
+                }
+            }
+        }
+
+        function deleteCollection() {
+            if (!currentCollectionName || currentCollectionName === 'Favorites') {
+                return;
+            }
+            
+            if (confirm(`Delete collection "${currentCollectionName}"?`)) {
+                const deletedName = currentCollectionName;
+                delete collections[deletedName];
+                
+                // Reset to Favorites in state 1 (selected, not filtering)
+                currentCollectionName = 'Favorites';
+                filteringCollectionName = null;
+                
+                saveCollections();
+                renderCollectionButtons();
+                filterIcons();
+            }
+        }
+
+        function shareCurrentCollection() {
+            const collection = getCurrentCollection();
+            if (collection.length === 0) {
+                alert('Add icons to collection first!');
+                return;
+            }
+            
+            const baseUrl = window.location.origin + window.location.pathname;
+            const params = new URLSearchParams();
+            
+            // Use short parameter names
+            if (currentCollectionName && currentCollectionName !== 'Favorites') {
+                params.set('c', currentCollectionName);
+            }
+            // Encode icon list as compact 2-char blocks
+            const encodedIcons = encodeList(collection);
+            params.set('i', encodedIcons);
+            
+            const shareUrl = `${baseUrl}?${params.toString()}#icons`;
+            
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                showToast(`Collection "${currentCollectionName}" link copied!`);
+            });
+        }
+
+
+        function setupCategories() {
+            const categoryFilter = document.getElementById('categoryFilter');
+            if (!categoryFilter) return;
+
+            categoryFilter.innerHTML = Object.keys(iconCategories).map(catKey => {
+                const cat = iconCategories[catKey];
+                return `<button class="category-btn ${catKey === currentCategory ? 'active' : ''}" onclick="setCategory('${catKey}')">${cat.name}</button>`;
+            }).join('');
+        }
+
+        function setCategory(category) {
+            // If clicking the same category again, deselect and show all icons
+            if (currentCategory === category) {
+                currentCategory = 'all';
+            } else {
+                currentCategory = category;
+            }
+            setupCategories();
+            filterIcons();
+            updateURL();
+        }
+
+        function updateURL() {
+            const params = new URLSearchParams();
+            if (currentSearchTerm) params.set('search', currentSearchTerm);
+            if (currentCategory !== 'all') params.set('category', currentCategory);
+            if (selectedIcon && selectedIcon !== 'home') params.set('icon', selectedIcon);
+            if (currentSettings.size !== 2.5) params.set('size', currentSettings.size);
+            if (currentSettings.color !== '#1a1a1a' && currentSettings.color !== '#e4e4e7') params.set('color', currentSettings.color.replace('#', ''));
+            
+            const newURL = params.toString() ? `${window.location.pathname}?${params.toString()}` : window.location.pathname;
+            window.history.replaceState({}, '', newURL);
+        }
+
+        function loadFromURL() {
+            const params = new URLSearchParams(window.location.search);
+            if (params.has('search')) {
+                currentSearchTerm = params.get('search');
+                document.getElementById('searchInput').value = currentSearchTerm;
+            }
+            if (params.has('category')) {
+                currentCategory = params.get('category');
+            }
+            if (params.has('icon')) {
+                selectedIcon = params.get('icon');
+            }
+            if (params.has('size')) {
+                currentSettings.size = parseFloat(params.get('size'));
+            }
+            if (params.has('color')) {
+                currentSettings.color = '#' + params.get('color');
+            }
+            // Handle collection parameter (new short format 'c' or old 'collection')
+            if (params.has('c')) {
+                const collectionName = params.get('c');
+                if (collectionName && !collections[collectionName]) {
+                    collections[collectionName] = [];
+                }
+                if (collectionName) {
+                    currentCollectionName = collectionName;
+                }
+            } else if (params.has('collection')) {
+                // Backwards compatibility with old format
+                const collectionName = params.get('collection');
+                if (collectionName && !collections[collectionName]) {
+                    collections[collectionName] = [];
+                }
+                if (collectionName) {
+                    currentCollectionName = collectionName;
+                }
+            }
+            
+            // Handle icons parameter (new encoded format 'i' or old 'icons')
+            if (params.has('i')) {
+                const encodedIcons = params.get('i');
+                const iconList = decodeList(encodedIcons);
+                if (iconList.length > 0) {
+                    if (!currentCollectionName) {
+                        // If no collection specified, add to "Shared" collection
+                        currentCollectionName = 'Shared';
+                        if (!collections['Shared']) {
+                            collections['Shared'] = [];
+                        }
+                    }
+                    collections[currentCollectionName] = iconList;
+                    // When loading from URL, set to state 2 (full/filtering) to show the icons
+                    filteringCollectionName = currentCollectionName;
+                    saveCollections();
+                }
+            } else if (params.has('icons')) {
+                // Backwards compatibility with old format
+                const iconsParam = params.get('icons');
+                const iconList = iconsParam.split(',').filter(i => i && flutterIcons.includes(i));
+                if (iconList.length > 0) {
+                    if (!currentCollectionName) {
+                        // If no collection specified, add to "Shared" collection
+                        currentCollectionName = 'Shared';
+                        if (!collections['Shared']) {
+                            collections['Shared'] = [];
+                        }
+                    }
+                    collections[currentCollectionName] = iconList;
+                    // When loading from URL, set to state 2 (full/filtering) to show the icons
+                    filteringCollectionName = currentCollectionName;
+                    saveCollections();
+                }
+            }
+        }
+
+
         function initializePage() {
             loadSettings();
+            loadCollections();
+            loadRecentIcons();
+            loadFromURL();
+            // Set Favorites as default to state 1 (selected, not filtering) if no collection is selected
+            if (!currentCollectionName && collections['Favorites']) {
+                currentCollectionName = 'Favorites';
+                filteringCollectionName = null; // State 1: selected but not filtering
+            }
             applyTheme(currentSettings.theme, { preserveColor: true });
             applySettingsToControls();
+            setupCategories();
+            renderCollectionButtons();
             filterIcons();
             updateCodePreview();
             setupEventListeners();
@@ -1823,6 +2807,45 @@
             // Theme toggle
             document.getElementById('themeSwitch').addEventListener('click', toggleTheme);
             
+            // Hide default tooltips and use custom ones
+            document.addEventListener('mouseover', function(e) {
+                if (e.target.classList.contains('collection-btn') || e.target.classList.contains('collection-action-btn')) {
+                    e.target.setAttribute('data-title', e.target.getAttribute('title'));
+                    e.target.removeAttribute('title');
+                }
+            });
+            
+            document.addEventListener('mouseout', function(e) {
+                if (e.target.classList.contains('collection-btn') || e.target.classList.contains('collection-action-btn')) {
+                    const title = e.target.getAttribute('data-title');
+                    if (title) {
+                        e.target.setAttribute('title', title);
+                    }
+                }
+            });
+            
+            // Event delegation for icon clicks - copy code when clicking icon (not star)
+            const iconsGrid = document.getElementById('iconsGrid');
+            if (iconsGrid) {
+                iconsGrid.addEventListener('click', function(e) {
+                    // Find the closest icon-item
+                    const iconItem = e.target.closest('.icon-item');
+                    if (!iconItem) return;
+                    
+                    // Don't copy if clicking the star button or anything inside it
+                    const favoriteBtn = e.target.closest('.favorite-btn');
+                    if (favoriteBtn) {
+                        return;
+                    }
+                    
+                    // Get icon name from data attribute
+                    const iconName = iconItem.getAttribute('data-icon-name');
+                    if (iconName) {
+                        copyToClipboard(iconName);
+                    }
+                }, true); // Use capture phase to ensure we catch it
+            }
+            
             // Drawer functionality
             setupDrawer();
             
@@ -1833,6 +2856,7 @@
                 renderIcons();
                 updateCodePreview();
                 saveSettings();
+                updateURL();
             });
             
             document.getElementById('iconColor').addEventListener('change', (e) => {
@@ -1840,6 +2864,7 @@
                 renderIcons();
                 updateCodePreview();
                 saveSettings();
+                updateURL();
             });
             
             document.getElementById('backgroundColor').addEventListener('change', (e) => {
@@ -1849,7 +2874,7 @@
                 saveSettings();
             });
             
-            ['boldToggle', 'invertToggle', 'roundedToggle', 'outlinedToggle'].forEach(id => {
+            ['boldToggle', 'invertToggle', 'roundedToggle', 'outlinedToggle', 'darkPreviewToggle'].forEach(id => {
                 document.getElementById(id).addEventListener('change', (e) => {
                     const prop = id.replace('Toggle', '');
                     currentSettings[prop] = e.target.checked;
@@ -1866,11 +2891,36 @@
         }
 
         function filterIcons() {
-            filteredIcons = currentSearchTerm === '' ? 
-                [...flutterIcons] : 
-                flutterIcons.filter(iconName => iconName.toLowerCase().includes(currentSearchTerm));
+            let icons = [...flutterIcons];
+            
+            // Filter by collection only if in state 2 (full/filtering mode)
+            if (filteringCollectionName && collections[filteringCollectionName]) {
+                const collectionIcons = collections[filteringCollectionName];
+                if (collectionIcons.length > 0) {
+                    icons = icons.filter(iconName => collectionIcons.includes(iconName));
+                } else {
+                    // Empty collection, show nothing
+                    icons = [];
+                }
+            }
+            
+            // Filter by category
+            if (currentCategory !== 'all' && iconCategories[currentCategory]) {
+                const categoryIcons = iconCategories[currentCategory].icons;
+                if (categoryIcons.length > 0) {
+                    icons = icons.filter(iconName => categoryIcons.includes(iconName));
+                }
+            }
+            
+            // Filter by search term
+            if (currentSearchTerm !== '') {
+                icons = icons.filter(iconName => iconName.toLowerCase().includes(currentSearchTerm));
+            }
+            
+            filteredIcons = icons;
             renderIcons();
             updateStats();
+            updateURL();
         }
 
         function renderIcons() {
@@ -1896,15 +2946,24 @@
             if (currentSettings.invert) itemClasses.push('inverted');
             
             const style = `font-size: ${currentSettings.size}rem; color: ${currentSettings.color};`;
-            const bgStyle = currentSettings.backgroundColor !== 'transparent' ? `background-color: ${currentSettings.backgroundColor};` : '';
+            let bgStyle = currentSettings.backgroundColor !== 'transparent' ? `background-color: ${currentSettings.backgroundColor};` : '';
+            if (currentSettings.darkPreview && currentSettings.backgroundColor === 'transparent') {
+                bgStyle = 'background-color: #1a1a1a;';
+            }
             const roundedStyle = currentSettings.rounded ? `width: ${(currentSettings.size * 16) + 20}px; height: ${(currentSettings.size * 16) + 20}px;` : '';
             
-            iconsGrid.innerHTML = filteredIcons.map(iconName => `
-                <div class="${itemClasses.join(' ')}" onclick="copyToClipboard('${iconName}')" onmouseover="selectedIcon='${iconName}'; updateCodePreview('${iconName}')">
+            iconsGrid.innerHTML = filteredIcons.map(iconName => {
+                const inCollection = isInCurrentCollection(iconName);
+                return `
+                <div class="${itemClasses.join(' ')}" data-icon-name="${iconName}" onclick="handleIconClick('${iconName}', event)" onmouseover="selectedIcon='${iconName}'; updateCodePreview('${iconName}')">
+                    <button class="favorite-btn ${inCollection ? 'favorited' : ''}" onclick="toggleIconInCollection('${iconName}', event)" title="${inCollection ? `Remove from ${currentCollectionName}` : `Add to ${currentCollectionName}`}">
+                        <span class="material-icons">${inCollection ? 'star' : 'star_border'}</span>
+                    </button>
                     <span class="${iconClasses.join(' ')}" style="${style} ${bgStyle} ${roundedStyle}">${iconName}</span>
                     <div class="icon-name">${iconName}</div>
                 </div>
-            `).join('');
+            `;
+            }).join('');
         }
 
         function updateStats() {
@@ -1955,8 +3014,17 @@
             }
         }
 
+        function handleIconClick(iconName, event) {
+            // Don't copy if clicking the star button (it stops propagation, but just in case)
+            if (event.target.closest('.favorite-btn')) {
+                return;
+            }
+            copyToClipboard(iconName);
+        }
+
         function copyToClipboard(iconName) {
             selectedIcon = iconName;
+            addToRecent(iconName);
             let iconCode = `Icons.${iconName}`;
             const stylingOptions = [];
             
@@ -1981,6 +3049,7 @@
             navigator.clipboard.writeText(iconCode).then(() => {
                 showToast(iconCode);
                 highlightCopiedIcon(iconName);
+                updateURL();
             }).catch(err => {
                 console.error('Failed to copy:', err);
             });
@@ -2004,11 +3073,16 @@
             saveSettings();
         }
 
-        function showToast(iconCode) {
+        function showToast(message) {
             const toast = document.getElementById('toast');
             const toastText = document.getElementById('toastText');
             
-            toastText.textContent = `Copied: ${iconCode.split('\n')[0]}`;
+            // If message contains newlines (like icon code), format it
+            if (message.includes('\n')) {
+                toastText.textContent = `Copied: ${message.split('\n')[0]}`;
+            } else {
+                toastText.textContent = message;
+            }
             toast.classList.add('show');
             
             setTimeout(() => {
