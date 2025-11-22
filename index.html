@@ -3237,8 +3237,10 @@
             
             const styleString = styles.join('; ');
             
+            // Use compact URL format with encoded icon
+            const encodedIcon = encodeList([iconName]);
             const embedCode = `<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<a href="https://fluttericons.com/?icon=${iconName}" style="text-decoration: none; color: ${currentSettings.color || '#333'};">
+<a href="https://fluttericons.com/?i=${encodedIcon}" style="text-decoration: none; color: ${currentSettings.color || '#333'};">
   <span class="material-icons" style="${styleString}">${iconName}</span>
 </a>`;
             
