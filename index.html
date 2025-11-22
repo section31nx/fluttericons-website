@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WK46KQW40M"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', 'G-WK46KQW40M');
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -2468,6 +2477,12 @@
 
         function toggleTheme() {
             const nextTheme = currentSettings.theme === 'dark' ? 'light' : 'dark';
+            // Track theme toggle
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'toggle_theme', {
+                    'theme': nextTheme
+                });
+            }
             applyTheme(nextTheme);
             renderIcons();
             updateCodePreview();
@@ -2546,9 +2561,23 @@
             if (index > -1) {
                 collection.splice(index, 1);
                 message = `Icon removed from ${currentCollectionName}`;
+                // Track favorite removal
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'remove_from_collection', {
+                        'icon_name': iconName,
+                        'collection_name': currentCollectionName
+                    });
+                }
             } else {
                 collection.push(iconName);
                 message = `Icon added to ${currentCollectionName}`;
+                // Track favorite addition
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'add_to_collection', {
+                        'icon_name': iconName,
+                        'collection_name': currentCollectionName
+                    });
+                }
             }
             saveCollections();
             renderCollectionButtons();
@@ -2621,6 +2650,14 @@
                 filteringCollectionName = null;
             }
             
+            // Track collection selection
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'select_collection', {
+                    'collection_name': name,
+                    'is_filtering': filteringCollectionName === name
+                });
+            }
+            
             renderCollectionButtons();
             filterIcons();
         }
@@ -2633,6 +2670,12 @@
                     collections[trimmedName] = [];
                     currentCollectionName = trimmedName;
                     filteringCollectionName = null; // State 1: selected but not filtering
+                    // Track collection creation
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'create_collection', {
+                            'collection_name': trimmedName
+                        });
+                    }
                     saveCollections();
                     renderCollectionButtons();
                     filterIcons();
@@ -2650,6 +2693,13 @@
             if (confirm(`Delete collection "${currentCollectionName}"?`)) {
                 const deletedName = currentCollectionName;
                 delete collections[deletedName];
+                
+                // Track collection deletion
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'delete_collection', {
+                        'collection_name': deletedName
+                    });
+                }
                 
                 // Reset to Favorites in state 1 (selected, not filtering)
                 currentCollectionName = 'Favorites';
@@ -2681,6 +2731,14 @@
             
             const shareUrl = `${baseUrl}?${params.toString()}#icons`;
             
+            // Track collection share
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'share_collection', {
+                    'collection_name': currentCollectionName,
+                    'icon_count': collection.length
+                });
+            }
+            
             navigator.clipboard.writeText(shareUrl).then(() => {
                 showToast(`Collection "${currentCollectionName}" link copied!`);
             });
@@ -2703,6 +2761,12 @@
                 currentCategory = 'all';
             } else {
                 currentCategory = category;
+            }
+            // Track category selection
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'select_category', {
+                    'category': currentCategory
+                });
             }
             setupCategories();
             filterIcons();
@@ -3220,6 +3284,14 @@
         function copyEmbedCode(iconName, event) {
             if (event) event.stopPropagation();
             
+            // Track HTML embed code copy
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'copy_embed_code', {
+                    'icon_name': iconName,
+                    'code_type': 'html'
+                });
+            }
+            
             // Build style string from current settings
             const sizePx = currentSettings.size * 16;
             const styles = [];
@@ -3252,6 +3324,13 @@
         }
 
         function copyToClipboard(iconName) {
+            // Track icon click event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'icon_click', {
+                    'icon_name': iconName,
+                    'code_type': 'flutter'
+                });
+            }
             selectedIcon = iconName;
             addToRecent(iconName);
             let iconCode = `Icons.${iconName}`;
@@ -3286,6 +3365,12 @@
 
         function copyCodeToClipboard() {
             const codeText = document.getElementById('codeText').textContent;
+            // Track copy code button click
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'copy_code_button', {
+                    'code_type': codeText.includes('Icons.') ? 'flutter' : 'html'
+                });
+            }
             navigator.clipboard.writeText(codeText).then(() => {
                 showToast(codeText);
             }).catch(err => {
@@ -3294,6 +3379,10 @@
         }
 
         function resetSettings() {
+            // Track settings reset
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'reset_settings');
+            }
             currentSettings = { ...defaultSettings };
             applyTheme(currentSettings.theme, { preserveColor: true });
             applySettingsToControls();
